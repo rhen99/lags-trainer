@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://rhen99:0l79WptmPrI5h5HK@project-planner.jcmvz.mongodb.net/lags-trainer?retryWrites=true&w=majority",
+  "jwtSecret": "lt_secret"
+}
