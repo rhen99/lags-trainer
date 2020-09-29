@@ -30,7 +30,7 @@ router.post("/register", async (req, res) => {
     });
 
   if (!regex.username.test(username))
-    res.status(400).json(
+    return res.status(400).json(
       username.length < 3
         ? { msg: "Should be at least 3 characters." }
         : username.length > 24
