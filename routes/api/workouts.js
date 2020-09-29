@@ -1,15 +1,32 @@
 const express = require("express");
 const router = express.Router();
 const Workout = require("../../models/Workout");
+const auth = require("../../middleware/auth");
 
 // @method GET api/workouts
 // @desc Get all the user's workouts
 // @access Private
 
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
   try {
-    const workouts = await Workout.find();
+    const workouts = await Workout.find({ user_id: req.user.id });
     res.json(workouts);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      msg: "Server Error",
+    });
+  }
+});
+
+// @method GET api/workouts/:id
+// @desc Get one workout
+// @access Private
+
+router.get("/:id", auth, async (req, res) => {
+  try {
+    const workout = await Workout.findOne({ _id: req.params.id });
+    res.json(workout);
   } catch (err) {
     console.error(err);
     res.status(500).json({
@@ -22,7 +39,7 @@ router.get("/", async (req, res) => {
 // @desc Create a workout
 // @access Private
 
-router.post("/create", async (req, res) => {
+router.post("/create", auth, async (req, res) => {
   const { name, sets, exercises } = req.body;
   if (!name || !sets || !exercises)
     return res.status(400).json({
@@ -44,6 +61,7 @@ router.post("/create", async (req, res) => {
       name,
       sets,
       exercises,
+      user_id: req.user.id,
     });
     await newWorkout.save();
     res.json({
@@ -61,7 +79,7 @@ router.post("/create", async (req, res) => {
 // @desc Update a workout
 // @access Private
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", auth, async (req, res) => {
   try {
     await Workout.updateOne(
       { _id: req.params.id },
@@ -86,7 +104,7 @@ router.put("/:id", async (req, res) => {
 // @desc Delete a workout
 // @access Private
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", auth, async (req, res) => {
   try {
     await Workout.deleteOne({ _id: req.params.id });
     res.json({
