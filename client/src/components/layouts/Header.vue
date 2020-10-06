@@ -1,8 +1,11 @@
 <template>
-  <header class="header">
+  <header class="header" :class="{ hide: hide }">
     <div class="container">
       <h1 class="header-title">
-        LAGS Trainer <a href="#" class="hb-btn"><i class="fas fa-bars"></i></a>
+        LAGS Trainer
+        <a href="#" class="hb-btn" @click="showNav"
+          ><i class="fas fa-bars"></i
+        ></a>
       </h1>
       <ul class="navigation">
         <li class="navigation-item">
@@ -22,6 +25,17 @@
 <script>
   export default {
     name: "Header",
+    data() {
+      return {
+        hide: true,
+      };
+    },
+    methods: {
+      showNav(e) {
+        e.preventDefault();
+        this.hide = !this.hide;
+      },
+    },
   };
 </script>
 
@@ -29,7 +43,7 @@
 .header {
   padding: 0.5rem 0;
   overflow: hidden;
-  /* max-height: 41px; */
+  /*  */
 }
 .header-title {
   font-size: 1.3rem;
@@ -40,8 +54,7 @@
   right: 0;
   color: #333;
 }
-.navigation {
-}
+
 .navigation-item a {
   display: block;
   width: 100%;
@@ -50,6 +63,9 @@
   font-size: 0.8rem;
   color: #333;
   font-weight: 600;
+}
+.hide {
+  max-height: 41px;
 }
 @media (min-width: 1024px) {
   .hb-btn {
