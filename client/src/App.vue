@@ -2,10 +2,11 @@
   <div id="app">
     <Header />
 
-    <div class="container">
+    <div class="container push-down">
       <!-- <Login /> -->
       <!-- <Register /> -->
-      <Workouts />
+      <!-- <Workouts /> -->
+      <Single/>
     </div>
   </div>
 </template>
@@ -14,14 +15,16 @@
 import Header from "./components/layouts/Header";
 // import Login from "./components/Login";
 // import Register from "./components/Register";
-import Workouts from "./components/Workouts";
+//import Workouts from "./components/Workouts";
+import Single from './components/Single';
 export default {
   name: "App",
   components: {
     Header,
     // Login,
     // Register,
-    Workouts,
+    //Workouts,
+    Single
   },
 };
 </script>
@@ -56,6 +59,9 @@ ul {
   height: 100%;
   margin: auto;
   padding: 0 1rem;
+}
+.push-down{
+  margin-top: 41px;
 }
 .d-flex {
   display: flex;
