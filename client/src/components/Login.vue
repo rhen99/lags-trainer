@@ -1,14 +1,15 @@
 <template>
   <div class="login d-flex justify-content-center align-items-center">
     <div class="card">
-      <form action="#">
+      <p class="error-alert" v-if="error">{{error}}</p>
+      <form @submit="login">
         <div class="form-group">
           <label for="username">Username</label>
-          <input type="text" class="form-control" id="username" />
+          <input type="text" v-model="username" class="form-control" id="username" />
         </div>
         <div class="form-group">
-          <label for="username">Password</label>
-          <input type="password" class="form-control" id="password" />
+          <label for="password">Password</label>
+          <input type="password" v-model="password" class="form-control" id="password" />
         </div>
         <input type="submit" value="Login" class="btn btn-primary btn-block" />
       </form>
@@ -17,8 +18,41 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: "Login",
+  methods: {
+    setError(error){
+      if(error){
+        this.error = error
+      }else{
+        this.error = null
+      }
+    },
+    login(e) {
+      e.preventDefault();
+      axios.post('api/users/login', {
+        username: this.username,
+        password: this.password,
+     
+      })
+      .then(res => {
+        this.setError(null)
+        localStorage.setItem('token', res.data.token);
+        window.location.reload();
+      })
+      .catch(err => {
+        this.setError(err.response.data.msg)
+      })
+    },
+  },
+  data() {
+    return {
+      username:'',
+      password: '',
+      error: null,
+    }
+  },
 };
 </script>
 

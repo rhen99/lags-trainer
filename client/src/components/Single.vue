@@ -49,27 +49,11 @@ export default {
     },
     methods: {
         toggleTimer(){
-            if(this.ticking){
-                this.ticking = !this.ticking
-                this.stopTime();
-            }else{
-                this.ticking = !this.ticking
-                this.startTime();
-            }
-        },
-        startTime () {
-
-        },
-        setTime() {
-
-        },
-        stopTime() {
-
-        }
+           this.ticking = !this.ticking
+        },  
     },
     created(){
-        this.reps = 3,
-        this.sets = 3
+        
     }
 
 

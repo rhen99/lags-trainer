@@ -27,7 +27,7 @@
           <a href="#">Login</a>
         </li>
         <li class="navigation-item">
-          <a href="#">Logout</a>
+          <a @click="logout" href="#">Logout</a>
         </li>
       </ul>
   </header>
@@ -47,6 +47,11 @@
         e.preventDefault();
         this.show = !this.show;
       },
+      logout(e){
+        e.preventDefault();
+        localStorage.removeItem('token');
+        window.location.reload();
+      }
     },
   };
 </script>

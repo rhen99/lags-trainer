@@ -3,29 +3,51 @@
     <Header />
 
     <div class="container push-down">
-      <!-- <Login /> -->
+      <Login />
       <!-- <Register /> -->
       <!-- <Workouts /> -->
-      <Single/>
+      <!-- <Single/> -->
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
 import Header from "./components/layouts/Header";
-// import Login from "./components/Login";
-// import Register from "./components/Register";
+import Login from "./components/Login";
+//import Register from "./components/Register";
 //import Workouts from "./components/Workouts";
-import Single from './components/Single';
+//import Single from './components/Single';
 export default {
   name: "App",
   components: {
     Header,
-    // Login,
-    // Register,
+    Login,
+     //Register,
     //Workouts,
-    Single
+    //Single
   },
+  data(){
+    return{
+      workouts: [],
+      user: null
+   }
+  },
+  created(){
+    
+  },
+  mounted (){
+   axios.get('api/users', {
+      headers:{
+      "x-auth-token": localStorage.getItem('token')
+    }
+    })
+    .then(res => this.user = {...res.data})
+    .catch((err) => {
+      console.log(err.response.data);
+      localStorage.removeItem('token');
+    }) 
+  }
 };
 </script>
 
@@ -103,5 +125,9 @@ ul {
 .btn-block {
   display: block;
   width: 100%;
+}
+.error-alert{
+  background-color: rgb(253, 181, 181);
+  padding: 1rem;
 }
 </style>
