@@ -1,12 +1,8 @@
 <template>
   <div id="app">
     <Header />
-
     <div class="container push-down">
-      <Login />
-      <!-- <Register /> -->
-      <!-- <Workouts /> -->
-      <!-- <Single/> -->
+      <router-view/>
     </div>
   </div>
 </template>
@@ -14,27 +10,17 @@
 <script>
 import axios from 'axios';
 import Header from "./components/layouts/Header";
-import Login from "./components/Login";
-//import Register from "./components/Register";
-//import Workouts from "./components/Workouts";
-//import Single from './components/Single';
+
 export default {
   name: "App",
-  components: {
-    Header,
-    Login,
-     //Register,
-    //Workouts,
-    //Single
-  },
   data(){
     return{
       workouts: [],
       user: null
    }
   },
-  created(){
-    
+  components: {
+    Header
   },
   mounted (){
    axios.get('api/users', {

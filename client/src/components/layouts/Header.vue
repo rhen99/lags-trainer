@@ -9,24 +9,24 @@
       </h1>
       <ul class="navigation hide-on-sm">
         <li class="navigation-item">
-          <a href="#">Register</a>
+          <router-link to="/register">Register</router-link>
         </li>
         <li class="navigation-item">
-          <a href="#">Login</a>
+          <router-link to="/login">Login</router-link>
         </li>
         <li class="navigation-item">
-          <a href="#">Logout</a>
+          <a href="#" @click="logout">Logout</a>
         </li>
       </ul>
     </div>
     <ul class="navigation navigation-mobile" :class="{show:show}">
-        <li class="navigation-item">
-          <a href="#">Register</a>
+        <li class="navigation-item" v-if="!isLoggedIn">
+          <router-link to="/register">Register</router-link>
         </li>
-        <li class="navigation-item">
-          <a href="#">Login</a>
+        <li v-if="!isLoggedIn" class="navigation-item">
+          <router-link to="/login">Login</router-link>
         </li>
-        <li class="navigation-item">
+        <li v-if="isLoggedIn" class="navigation-item">
           <a @click="logout" href="#">Logout</a>
         </li>
       </ul>
@@ -39,7 +39,8 @@
     name: "Header",
     data() {
       return {
-        show: false
+        show: false,
+        isLoggedIn: false
       };
     },
     methods: {
@@ -53,6 +54,14 @@
         window.location.reload();
       }
     },
+    created(){
+      if(localStorage.getItem('token')){
+        this.isLoggedIn = true;
+      }else{
+        this.isLoggedIn = false;
+      }
+    }
+    
   };
 </script>
 
