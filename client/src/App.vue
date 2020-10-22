@@ -105,6 +105,11 @@ ul {
   padding: 1.8rem 2.8rem;
   box-shadow: 3px 3px 10px rgba(48, 48, 48, 0.377);
 }
+.card-title{
+  text-align: center;
+  font-size: 1.3rem;
+  margin: .5rem 0;
+}
 .form-group {
   padding: 0.3rem 0.1rem;
 }

@@ -1,6 +1,7 @@
 <template>
   <div class="register d-flex justify-content-center align-items-center">
     <div class="card">
+      <h1 class="card-title">Register</h1>
       <p v-if="error" class="error-alert">{{error}}</p>
       <form action="#" @submit="register">
         <div class="form-group">

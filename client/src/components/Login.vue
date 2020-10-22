@@ -1,6 +1,7 @@
 <template>
   <div class="login d-flex justify-content-center align-items-center">
     <div class="card">
+      <h1 class="card-title">Login</h1>
       <p class="error-alert" v-if="error">{{error}}</p>
       <form @submit="login">
         <div class="form-group">
