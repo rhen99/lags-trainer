@@ -4,6 +4,7 @@ import Login from "../components/Login";
 import Register from "../components/Register";
 import Workouts from "../components/Workouts";
 import Single from '../components/Single';
+import AddWorkout from '../components/AddWorkout'
 
 Vue.use(VueRouter)
 
@@ -33,6 +34,14 @@ const routes = [
     }
   },
   {
+    path: '/add-workout',
+    name: 'AddWorkout',
+    component: AddWorkout,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
     path: '/:id',
     name: 'Single',
     component: Single,
@@ -40,6 +49,7 @@ const routes = [
       requiresAuth: true
     }
   },
+  
 ]
 
 const router = new VueRouter({

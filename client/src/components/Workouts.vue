@@ -1,6 +1,7 @@
 <template>
   <div class="workouts">
     <h2 class="title">Exercises</h2>
+    <router-link class="btn btn-primary add" to="/add-workout">Add Workout</router-link>
     <ul class="workout-list">
       <li class="workout"><a href="#">Item</a></li>
       <li class="workout"><a href="#">Item</a></li>
@@ -16,6 +17,9 @@ export default {
 </script>
 
 <style scoped>
+.add{
+  margin: .5rem 0;
+}
 .title {
   padding: 1rem 0;
 }

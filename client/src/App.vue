@@ -22,8 +22,9 @@ export default {
   components: {
     Header
   },
-  mounted (){
-   axios.get('api/users', {
+  methods: {
+    getUser(){
+      axios.get('api/users', {
       headers:{
       "x-auth-token": localStorage.getItem('token')
     }
@@ -32,7 +33,26 @@ export default {
     .catch((err) => {
       console.log(err.response.data);
       localStorage.removeItem('token');
-    }) 
+    })
+    },
+    getWorkouts(){
+      axios.get('api/workouts', {
+      headers:{
+        "x-auth-token": localStorage.getItem('token')
+      }
+    })
+    .then(res => this.workouts = [...res.data])
+    .catch(err => console.log(err.response.data));
+
+    }
+  },
+  mounted (){
+    if(localStorage.getItem('token')){
+      this.getUser();
+      this.getWorkouts();
+    }
+
+    
   }
 };
 </script>
@@ -100,6 +120,7 @@ ul {
 }
 .btn {
   border: none;
+  display: inline-block;
   background: transparent;
   padding: 0.6rem 1.2rem;
   font-size: 1rem;
